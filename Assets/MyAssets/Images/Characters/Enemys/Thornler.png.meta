@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7f4dc6b2d095de84495cbff2fc093584
+guid: 9ba1664a2548819449b94127556562fd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8097980798337571527
-    second: Anonymous_Idle_0
+      213: 489313117189906808
+    second: Thornler_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 75
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Anonymous_Idle_0
+      name: Thornler_0
       rect:
         serializedVersion: 2
-        x: 26
+        x: 0
         y: 0
-        width: 48
-        height: 96
+        width: 200
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7ca58d291aec16070800000000000000
-      internalID: 8097980798337571527
+      spriteID: 8712b0600b36ac600800000000000000
+      internalID: 489313117189906808
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Anonymous_Idle_0: 8097980798337571527
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7f4dc6b2d095de84495cbff2fc093584
+guid: 0e118835c13c4614ea9316f060ee2c3c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8097980798337571527
-    second: Anonymous_Idle_0
+      213: -1400587914984428043
+    second: Boxler_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 75
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Anonymous_Idle_0
+      name: Boxler_0
       rect:
         serializedVersion: 2
-        x: 26
+        x: 0
         y: 0
-        width: 48
-        height: 96
+        width: 200
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7ca58d291aec16070800000000000000
-      internalID: 8097980798337571527
+      spriteID: 5fde5a246bc109ce0800000000000000
+      internalID: -1400587914984428043
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Anonymous_Idle_0: 8097980798337571527
+      Boxler_0: -1400587914984428043
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
