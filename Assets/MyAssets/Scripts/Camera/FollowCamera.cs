@@ -12,6 +12,11 @@ namespace MyAssets
         private float mMaxPositionY;
 
 
+        public void SetTarget(Transform target)
+        {
+            mTarget = target;
+        }
+
         private void Awake()
         {
             mTarget = GameObject.FindGameObjectWithTag("Player").transform;
@@ -25,6 +30,7 @@ namespace MyAssets
         // Update is called once per frame
         private void Update()
         {
+            if(mTarget == null) { return; }
             Vector3 targetPos = mTarget.position;
 
             if(mTarget.position.y  < mMinPositionY)
