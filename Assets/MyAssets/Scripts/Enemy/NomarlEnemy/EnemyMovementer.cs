@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace MyAssets
 {
-    public class EnemyMovementer : MonoBehaviour
+    public class EnemyMovementer : DynamicGameObject
     {
         [SerializeField]
         private bool            mIsCliffStop;
@@ -29,12 +29,22 @@ namespace MyAssets
         }
 
         // Update is called once per frame
-        private void Update()
+        public override void Update()
         {
+            base.Update();
+            if (IsOutViewport())
+            {
+                return;
+            }
             ReverseCheck();
+        }
 
-
-
+        private void FixedUpdate()
+        {
+            if (IsOutViewport())
+            {
+                return;
+            }
             Move();
         }
 

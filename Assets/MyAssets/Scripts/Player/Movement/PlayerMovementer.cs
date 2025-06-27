@@ -25,8 +25,13 @@ namespace MyAssets
         [SerializeField]
         private float mJumpForce = 10f;
 
-        private bool mIsGrounded = false;
-        public bool IsGrounded => mIsGrounded;
+
+        private bool mIsMoveStoping;
+
+        public void SetMoveStoping(bool isStoping)
+        {
+            mIsMoveStoping = isStoping;
+        }
 
         private void Awake()
         {
@@ -38,18 +43,7 @@ namespace MyAssets
 
         private void Update()
         {
-            Ray2D ray = new Ray2D(transform.position, Vector2.down);
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, mCapsuleCollider2D.size.y / 2 + 0.1f, LayerMask.GetMask("Ground"));
-            if (hit.collider != null)
-            {
-                Debug.DrawLine(ray.origin, hit.point, Color.green);
-                mIsGrounded = true;
-            }
-            else
-            {
-                Debug.DrawRay(ray.origin, ray.direction * (mCapsuleCollider2D.size.y / 2 + 0.1f), Color.red);
-                mIsGrounded = false;
-            }
+
         }
 
         private void FixedUpdate()
@@ -60,6 +54,11 @@ namespace MyAssets
 
         private void Move()
         {
+            if(mIsMoveStoping)
+            {
+                mRigidbody2D.linearVelocity = new Vector2(0f, mRigidbody2D.linearVelocity.y);
+                return;
+            }
             Vector2 moveValue = mPlayerInput.MoveValue;
             Vector2 moveDirection = new Vector2(moveValue.x, 0f).normalized;
             float speedX = mMoveSpeed * Time.fixedDeltaTime;
@@ -68,9 +67,16 @@ namespace MyAssets
 
         private void Jump()
         {
-            if (mPlayerInput.MoveValue.y > 0&&mIsGrounded)
+            if (mPlayerInput.Jump && mPlayerInput.IsGrounded)
             {
-                mRigidbody2D.AddForce(Vector2.up * mJumpForce, ForceMode2D.Impulse);
+                Vector3 force = mRigidbody2D.linearVelocity;
+                Vector3 addForce = Vector2.up * (mJumpForce * (mPlayerInput.JumpValue + 1.0f));
+                if(force.y > 0)
+                {
+                    // Šù‚Éã•ûŒü‚É—Í‚ª‰Á‚í‚Á‚Ä‚¢‚éê‡AƒWƒƒƒ“ƒv‚µ‚È‚¢
+                    return;
+                }
+                mRigidbody2D.AddForce(Vector2.up * (mJumpForce * (mPlayerInput.JumpValue + 1.0f)), ForceMode2D.Impulse);
             }
         }
     }
