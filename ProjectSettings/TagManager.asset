@@ -47,8 +47,11 @@ TagManager:
   - name: Stage
     uniqueID: 1368547661
     locked: 0
-  - name: Player
+  - name: Character
     uniqueID: 243767683
+    locked: 0
+  - name: Item
+    uniqueID: 4071308587
     locked: 0
   - name: AreaEnemy
     uniqueID: 3823899125

@@ -24,7 +24,13 @@ namespace MyAssets
         eJump,
         ePrevious,
         eNext,
-        eSprint
+        eSprint,
+        eUpSelect,
+        eDownSelect,
+        eLeftSelect,
+        eRightSelect,
+        eDecide,
+        eESC
     };
 
     public class InputManager
@@ -51,6 +57,12 @@ namespace MyAssets
             mButtonActions.Add(mInputAction.Player.Previous);
             mButtonActions.Add(mInputAction.Player.Next);
             mButtonActions.Add(mInputAction.Player.Sprint);
+            mButtonActions.Add(mInputAction.UI.UpSelect);
+            mButtonActions.Add(mInputAction.UI.DownSelect);
+            mButtonActions.Add(mInputAction.UI.LeftSelect);
+            mButtonActions.Add(mInputAction.UI.RightSelect);
+            mButtonActions.Add(mInputAction.UI.Decide);
+            mButtonActions.Add(mInputAction.UI.Option);
         }
 
         ~InputManager()
@@ -63,6 +75,10 @@ namespace MyAssets
 
         public static void Initialize()
         {
+            if(mInputAction != null)
+            {
+                return; // Already initialized
+            }
             // Constructor logic if needed
             // Initialize the Input System
             mInputAction = new InputSystem_Actions();
@@ -77,6 +93,12 @@ namespace MyAssets
             mButtonActions.Add(mInputAction.Player.Previous);
             mButtonActions.Add(mInputAction.Player.Next);
             mButtonActions.Add(mInputAction.Player.Sprint);
+            mButtonActions.Add(mInputAction.UI.UpSelect);
+            mButtonActions.Add(mInputAction.UI.DownSelect);
+            mButtonActions.Add(mInputAction.UI.LeftSelect);
+            mButtonActions.Add(mInputAction.UI.RightSelect);
+            mButtonActions.Add(mInputAction.UI.Decide);
+            mButtonActions.Add(mInputAction.UI.Option);
         }
 
         public static void Shutdown()
@@ -85,6 +107,18 @@ namespace MyAssets
             // Destructor logic if needed
             // Disable the Input System
             mInputAction.Disable();
+        }
+
+        public static void SetLockedMouseMode()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        public static void SetNoneMouseMode()
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
 
         public static bool GetKey(KeyCode code)
