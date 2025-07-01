@@ -3,23 +3,30 @@ using UnityEngine;
 
 namespace MyAssets
 {
+    // プレイヤーキャラクターのダメージを管理するクラス
     public class PlayerDamageController : MonoBehaviour
     {
 
-        private Rigidbody2D mRigidbody2D;
+        private Rigidbody2D         mRigidbody2D;
 
-        private Collider2D mCollider2D;
+        private Collider2D          mCollider2D;
 
-        private float mDestroyDelay = 5f;
+        private float               mDestroyDelay = 5f;
 
         private List<MonoBehaviour> mMonoBehaviour = new List<MonoBehaviour>();
 
-        private bool mDeath;
+        private bool                mDeath;
+
+
+        private PlayerSEManager     mSEManager;
+
+        public bool                 Death => mDeath;
 
         private void Awake()
         {
             mRigidbody2D = GetComponent<Rigidbody2D>();
             mCollider2D = GetComponent<Collider2D>();
+            mSEManager = GetComponent<PlayerSEManager>();
 
             MonoBehaviour[] mono = GetComponents<MonoBehaviour>();
             for (int i = 0; i < mono.Length; i++)
@@ -62,6 +69,7 @@ namespace MyAssets
             gameActionSceneManager.RunOverEvent();
             PlayerLifeManager.DecreaseLife();
             mDeath = true;
+            mSEManager.OnPlay((int)PlayerSEManager.SEList_Player.eDamage);
         }
     }
 }

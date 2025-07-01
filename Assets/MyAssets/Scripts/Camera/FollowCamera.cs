@@ -2,14 +2,12 @@ using UnityEngine;
 
 namespace MyAssets
 {
+    // カメラがプレイヤーを追従するクラス
     public class FollowCamera : MonoBehaviour
     {
-        private Transform mTarget;
+        private Transform   mTarget;
 
-        private float mMoveRatio;
-
-        private float mMinPositionY;
-        private float mMaxPositionY;
+        private float       mMinPositionY;
 
 
         public void SetTarget(Transform target)

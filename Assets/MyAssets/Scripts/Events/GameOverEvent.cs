@@ -3,17 +3,18 @@ using UnityEngine;
 
 namespace MyAssets
 {
+    // ゲームオーバーイベントを管理するクラス
     public class GameOverEvent : MonoBehaviour
     {
         [SerializeField]
         private List<EventUIObject> mEventList = new List<EventUIObject>();
 
-        private int mEventClearCount;
+        private int                 mEventClearCount;
 
 
-        private Timer mEventEndTimer = new Timer();
+        private Timer               mEventEndTimer = new Timer();
 
-        private bool mIsEventEndAction;
+        private bool                mIsEventEndAction;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -22,6 +23,8 @@ namespace MyAssets
             mEventEndTimer.OnEnd += EventEndAction;
 
             mIsEventEndAction = false;
+
+            BGMPlayerManager.Instance.BGMManager.Stop();
         }
 
         // Update is called once per frame
@@ -41,7 +44,8 @@ namespace MyAssets
                 //もしカウントがイベント終了に必要な数と同じなら
                 if (mEventClearCount == mEventList.Count)
                 {
-                    mIsEventEndAction=true;
+                    BGMPlayerManager.Instance.BGMManager.Play(BGMManager.BGMList.eOver, false);
+                    mIsEventEndAction =true;
                     mEventEndTimer.Start(3.0f);
                 }
                 //まだ終わらなかったら

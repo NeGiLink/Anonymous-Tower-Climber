@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,26 +8,26 @@ namespace MyAssets
     public class ButtonController : MonoBehaviour
     {
         [SerializeField]
-        private Sprite mNormal;
-        public Sprite Normal => mNormal;
+        private Sprite          mNormal;
+        public Sprite           Normal => mNormal;
         [SerializeField]
-        private Sprite mHover;
-        public Sprite Hover => mHover;
+        private Sprite          mHover;
+        public Sprite           Hover => mHover;
 
 
-        private List<Button> mButtons = new List<Button>();
+        private List<Button>    mButtons = new List<Button>();
 
-        private Button mDecideButton;
+        private Button          mDecideButton;
 
-        private Vector2 mBasePos;
+        private Vector2         mBasePos;
 
-        private Vector2 mBaseScale;
+        private Vector2         mBaseScale;
 
-        private Vector2 mDecidePos = new Vector2(0.0f,-10.0f);
+        private Vector2         mDecidePos = new Vector2(0.0f,-10.0f);
 
-        private Vector2 mDecideScale = new Vector2(0.9f, 0.9f);
+        private Vector2         mDecideScale = new Vector2(0.9f, 0.9f);
 
-        private Timer mDecideTimer = new Timer();
+        private Timer           mDecideTimer = new Timer();
 
         private void Awake()
         {
@@ -51,7 +50,7 @@ namespace MyAssets
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             mDecideTimer.Update(Time.unscaledDeltaTime);
 
@@ -60,6 +59,7 @@ namespace MyAssets
             if(InputManager.GetKeyDown(KeyCode.eDecide))
             {
                 DecideStartDirection();
+                SystemSEManager.Instance.OnPlay((int)SystemSEManager.SEList_System.Decide);
             }
             if (!mDecideTimer.IsEnd()) { return; }
             Button[] buttons = GetSelectButtonPos();
@@ -68,6 +68,7 @@ namespace MyAssets
                 if (buttons[0] != null)
                 {
                     mDecideButton = buttons[0];
+                    SystemSEManager.Instance.OnPlay((int)SystemSEManager.SEList_System.Select);
                 }
             }
             else if(InputManager.GetKeyDown(KeyCode.eDownSelect))
@@ -75,6 +76,7 @@ namespace MyAssets
                 if (buttons[1] != null)
                 {
                     mDecideButton = buttons[1];
+                    SystemSEManager.Instance.OnPlay((int)SystemSEManager.SEList_System.Select);
                 }
             }
 
@@ -83,6 +85,7 @@ namespace MyAssets
                 if (buttons[2] != null)
                 {
                     mDecideButton = buttons[2];
+                    SystemSEManager.Instance.OnPlay((int)SystemSEManager.SEList_System.Select);
                 }
             }
             else if (InputManager.GetKeyDown(KeyCode.eRightSelect))
@@ -90,6 +93,7 @@ namespace MyAssets
                 if (buttons[3] != null)
                 {
                     mDecideButton = buttons[3];
+                    SystemSEManager.Instance.OnPlay((int)SystemSEManager.SEList_System.Select);
                 }
             }
 

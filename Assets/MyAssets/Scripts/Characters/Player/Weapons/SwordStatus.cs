@@ -20,6 +20,10 @@ namespace MyAssets
                 Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
                 knockbackDirection += Vector2.up;
                 damageController.OnDamage(knockbackDirection);
+                if(!damageController.Invincible)
+                {
+                    SystemSEManager.Instance.OnPlay((int)SystemSEManager.SEList_System.EnemyDead);
+                }
             }
         }
     }

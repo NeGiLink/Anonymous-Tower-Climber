@@ -3,11 +3,12 @@ using UnityEngine.UI;
 
 namespace MyAssets
 {
+    // シーンをロードするボタンのクラス
     public class LoadSceneButton : MonoBehaviour
     {
-        private Button mButton;
+        private Button      mButton;
         [SerializeField]
-        private SceneList mSceneList;
+        private SceneList   mSceneList;
 
         private void Awake()
         {

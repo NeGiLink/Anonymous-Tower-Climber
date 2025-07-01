@@ -3,28 +3,37 @@ using UnityEngine;
 
 namespace MyAssets
 {
+    //敵キャラクターのダメージを管理するクラス
     public class EnemyDamageController : MonoBehaviour
     {
 
-        private Rigidbody2D mRigidbody2D;
+        private Rigidbody2D         mRigidbody2D;
 
-        private Collider2D  mCollider2D;
+        private Collider2D          mCollider2D;
 
-        private float mDestroyDelay = 5f;
+        private float               mDestroyDelay = 5f;
 
         private List<MonoBehaviour> mMonoBehaviour = new List<MonoBehaviour>();
 
 
-        private bool mIsDead = false;
+        private bool                mIsDead = false;
 
         //ダメージでカラーを変更した時のVector4
-        private Vector4 mDamageColor = new Vector4(1f, 0.5f, 0.5f, 1f);
+        private Vector4             mDamageColor = new Vector4(1f, 0.5f, 0.5f, 1f);
 
-        private Vector4 mNormalColor;
+        private Vector4             mNormalColor;
 
-        private SpriteRenderer mSpriteRenderer;
+        private SpriteRenderer      mSpriteRenderer;
 
-        private float mDamageColorChangeDuration = 0.2f;
+        private float               mDamageColorChangeDuration = 0.2f;
+
+        [SerializeField]
+        private FXController        mFXObject;
+
+        [SerializeField]
+        private bool                mInvincible;
+
+        public bool                 Invincible => mInvincible;
 
         private void Awake()
         {
@@ -53,9 +62,16 @@ namespace MyAssets
 
         public void OnDamage(Vector2 force)
         {
+            if (mInvincible) { return; }
             if (mIsDead) { return; }
-            mRigidbody2D?.AddForce(force, ForceMode2D.Impulse);
-            mCollider2D.isTrigger = true;
+            if(mRigidbody2D != null)
+            {
+                mRigidbody2D?.AddForce(force, ForceMode2D.Impulse);
+            }
+            if(mCollider2D != null)
+            {
+                mCollider2D.isTrigger = true;
+            }
             // Change the color to indicate damage
             if (mSpriteRenderer != null)
             {
@@ -68,6 +84,10 @@ namespace MyAssets
                 {
                     mMonoBehaviour[i].enabled = false;
                 }
+            }
+            if(mFXObject != null)
+            {
+                Instantiate(mFXObject,transform.position,Quaternion.identity);
             }
             // Destroy the enemy after a delay
             Destroy(gameObject, mDestroyDelay);

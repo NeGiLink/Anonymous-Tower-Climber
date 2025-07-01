@@ -2,13 +2,14 @@ using UnityEngine;
 
 namespace MyAssets
 {
+    // ã•ûŒü‚ÉˆÚ“®‚·‚éUI—v‘f‚ğŠÇ—‚·‚éƒNƒ‰ƒX
     public class UpMoveDirection : MonoBehaviour
     {
-        private RectTransform mRectTransform;
+        private RectTransform   mRectTransform;
 
-        private float mDestroyDelay = 2.5f;
+        private float           mDestroyDelay = 2.5f;
 
-        private float mMoveSpeed = 1000.0f;
+        private float           mMoveSpeed = 1000.0f;
 
         public void SetMoveSpeed(float speed)
         {

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ec9842c38d46c4aa9086991da26e1f, type: 3}
+  m_Name: BGMLedger
+  m_EditorClassIdentifier: 
+  mValues:
+  - {fileID: 8300000, guid: fc2e7ee7e01424a41b81e11e042f68cb, type: 3}
+  - {fileID: 8300000, guid: b18ef47435ead1f4a86de8dfeeaa77b7, type: 3}
+  - {fileID: 8300000, guid: 182e3b95f2710d544906398bf678692e, type: 3}
+  - {fileID: 8300000, guid: 4196dd4ff5ada77448a3f667ec0c5f90, type: 3}

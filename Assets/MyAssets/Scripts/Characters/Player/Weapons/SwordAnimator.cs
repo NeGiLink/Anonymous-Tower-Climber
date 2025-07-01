@@ -2,22 +2,25 @@ using UnityEngine;
 
 namespace MyAssets
 {
+    // プレイヤーの剣のアニメーションを管理するクラス
     public class SwordAnimator : MonoBehaviour
     {
         [SerializeField]
-        private float mRotateZ;
+        private float               mRotateZ;
 
         [SerializeField]
-        private float mRotateSpeed;
+        private float               mRotateSpeed;
 
-        private bool mAttackStart;
+        private bool                mAttackStart;
 
         [SerializeField]
-        private GameObject mSwordHandle;
+        private GameObject          mSwordHandle;
+
+        private PlayerSEManager     mSEManager;
 
         private void Awake()
         {
-
+            mSEManager = GetComponent<PlayerSEManager>();
         }
 
         private void Start()
@@ -59,6 +62,7 @@ namespace MyAssets
                 if (InputManager.GetKeyDown(KeyCode.eAttack))
                 {
                     RotateStart();
+                    mSEManager.OnPlay((int)PlayerSEManager.SEList_Player.eAttack);
                 }
             }
         }

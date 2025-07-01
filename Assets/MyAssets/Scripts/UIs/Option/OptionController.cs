@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace MyAssets
 {
+    // オプション画面のコントローラークラス
     public class OptionController : MonoBehaviour
     {
         [SerializeField]

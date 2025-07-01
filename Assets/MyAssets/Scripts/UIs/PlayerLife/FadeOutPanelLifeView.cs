@@ -1,9 +1,9 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace MyAssets
 {
+    // プレイヤーのライフが0になったときにフェードアウトするパネルのビュー
     public class FadeOutPanelLifeView : MonoBehaviour
     {
         private Image mFadeOutPanel;
@@ -12,12 +12,22 @@ namespace MyAssets
 
         private float mFadeEventWaitCount = 4.0f;
 
+        public void SetFadeEventWaitCount(float count)
+        {
+            mFadeEventWaitCount = count;
+        }
+
         private bool mFadeStart;
 
         private float mFadeSpeed = 10.0f;
 
+        public void SetFadeSpeed(float speed)
+        {
+            mFadeSpeed = speed;
+        }
 
-        private GameActionSceneManager mGameActionSceneManager;
+
+        private ActionSceneManager mActionSceneManager;
 
         private void Awake()
         {
@@ -26,10 +36,11 @@ namespace MyAssets
 
         private void Start()
         {
-            mGameActionSceneManager = FindAnyObjectByType<GameActionSceneManager>();
-            if (mGameActionSceneManager != null)
+            GameResultManager.SetGameResult(GameResult.ePose);
+            mActionSceneManager = FindAnyObjectByType<ActionSceneManager>();
+            if (mActionSceneManager != null)
             {
-                mGameActionSceneManager.GameEventing = true;
+                mActionSceneManager.GameEventing = true;
             }
 
             mFadeOutTimer.Start(mFadeEventWaitCount);
@@ -54,9 +65,11 @@ namespace MyAssets
                 
                 if(mFadeOutPanel.rectTransform.localScale.magnitude <= 0.1f)
                 {
+                    GameResultManager.SetGameResult(GameResult.eNone);
                     mFadeStart = false;
-                    mGameActionSceneManager.GameEventing = false;
+                    mActionSceneManager.GameEventing = false;
                     Destroy(gameObject);
+                    BGMPlayerManager.Instance.PlayBGM();
                 }
             }
         }

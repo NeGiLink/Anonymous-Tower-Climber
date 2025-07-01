@@ -1,25 +1,25 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace MyAssets
 {
+    // ゲームクリアイベントを管理するクラス
     public class GameClearEvent : MonoBehaviour
     {
         [SerializeField]
         private List<EventUIObject> mEventList = new List<EventUIObject>();
 
         [SerializeField]
-        private RectTransform mEvenEndUI;
-        private Text mEventEndText;
+        private RectTransform       mEvenEndUI;
+        private Text                mEventEndText;
 
-        private int mEventClearCount;
+        private int                 mEventClearCount;
 
 
-        private Timer mEventEndTimer = new Timer();
+        private Timer               mEventEndTimer = new Timer();
 
-        private bool mIsEventEndAction;
+        private bool                mIsEventEndAction;
 
         private void Awake()
         {
@@ -36,6 +36,8 @@ namespace MyAssets
             mEventClearCount = 0;
             mEvenEndUI?.gameObject.SetActive(false);
             mEventEndTimer.OnEnd += EventEndAction;
+
+            BGMPlayerManager.Instance.BGMManager.Stop();
         }
 
         // Update is called once per frame
@@ -57,6 +59,7 @@ namespace MyAssets
                 //もしカウントがイベント終了に必要な数と同じなら
                 if (mEventClearCount == mEventList.Count)
                 {
+                    BGMPlayerManager.Instance.BGMManager.Play(BGMManager.BGMList.eClear, false);
                     mIsEventEndAction = true;
                     mEventEndTimer.Start(3.0f);
                     mEvenEndUI?.gameObject.SetActive(true);

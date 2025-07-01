@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace MyAssets
 {
+    // ゴール地点のトリガーを管理するクラス
     public class GoalTrigger : MonoBehaviour
     {
         private bool mIsGoal;

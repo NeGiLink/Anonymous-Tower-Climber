@@ -1,18 +1,18 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyAssets
 {
+    // ステージのサイドに移動する足場を管理するクラス
     public class SideMoveFoothold : DynamicGameObject
     {
-        private float mMoveSpeed; // 足場の移動速度
+        private float               mMoveSpeed; // 足場の移動速度
 
-        private bool mIsReverse; // 足場の移動方向を反転するかどうか
+        private bool                mIsReverse; // 足場の移動方向を反転するかどうか
 
-        private Rigidbody2D mRigidbody2D; // 足場のRigidbody2Dコンポーネント
+        private Rigidbody2D         mRigidbody2D; // 足場のRigidbody2Dコンポーネント
 
-        private List<Rigidbody2D> mRidingObjects = new List<Rigidbody2D>(); // 足場に乗っているオブジェクトのリスト
+        private List<Rigidbody2D>   mRidingObjects = new List<Rigidbody2D>(); // 足場に乗っているオブジェクトのリスト
 
         public void Initialize(float moveSpeed, bool isReverse)
         {

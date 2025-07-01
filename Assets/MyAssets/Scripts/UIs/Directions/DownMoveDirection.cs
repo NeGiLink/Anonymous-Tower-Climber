@@ -2,13 +2,12 @@ using UnityEngine;
 
 namespace MyAssets
 {
+    // 下方向に移動するUI要素のスクリプト
     public class DownMoveDirection : MonoBehaviour
     {
-        private RectTransform mRectTransform;
+        private RectTransform   mRectTransform;
 
-        private float mDestroyDelay = 2.5f;
-
-        private float mMoveSpeed = 1000.0f;
+        private float           mMoveSpeed = 1000.0f;
 
         public void SetMoveSpeed(float speed)
         {

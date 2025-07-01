@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6054356028712590164}
   - component: {fileID: 1628708092152102701}
   - component: {fileID: 1502001440942319022}
-  - component: {fileID: 764221901089919186}
   - component: {fileID: 6872717078032487972}
   m_Layer: 0
   m_Name: Boxler_01
@@ -171,19 +170,6 @@ MonoBehaviour:
   mIsCliffStop: 1
   mMoveSpeed: 100
   mMoveDirection: 0
---- !u!114 &764221901089919186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6668812388237167474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49c4207cc5d7af1489ccbad7b67511ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mKnockbackForce: 0
 --- !u!114 &6872717078032487972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,3 +182,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a96b2f05205d94d84fb0efb81e3105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mFXObject: {fileID: 5159437230567616353, guid: 21e18eef7b529fc4e886d46f2eb30598, type: 3}
+  mInvincible: 0

@@ -2,14 +2,7 @@ using UnityEngine;
 
 namespace MyAssets
 {
-    public enum CharacterState
-    {
-        Idle,
-        Run,
-        Jump,
-        Fall,
-        Attack
-    }
+    // プレイヤーの移動を管理するクラス
     [RequireComponent(typeof(PlayerInput))]
     public class PlayerMovementer : MonoBehaviour
     {
@@ -18,15 +11,13 @@ namespace MyAssets
 
         private Rigidbody2D         mRigidbody2D;
 
-        private CapsuleCollider2D   mCapsuleCollider2D;
-
         [SerializeField]
-        private float mMoveSpeed = 5f;
+        private float               mMoveSpeed = 5f;
         [SerializeField]
-        private float mJumpForce = 10f;
+        private float               mJumpForce = 10f;
 
 
-        private bool mIsMoveStoping;
+        private bool                mIsMoveStoping;
 
         public void SetMoveStoping(bool isStoping)
         {
@@ -37,7 +28,6 @@ namespace MyAssets
         {
             mPlayerInput = GetComponent<PlayerInput>();
             mRigidbody2D = GetComponent<Rigidbody2D>();
-            mCapsuleCollider2D = GetComponent<CapsuleCollider2D>();
         }
 
 
