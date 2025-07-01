@@ -3,11 +3,12 @@ using UnityEngine.UI;
 
 namespace MyAssets
 {
+    // ゲームのタイマーを管理するクラス
     public class GameTimer : MonoBehaviour
     {
-        private GameActionSceneManager mGameActionSceneManager;
+        private GameActionSceneManager  mGameActionSceneManager;
 
-        private Text mTimetext;
+        private Text                    mTimetext;
 
         private void Awake()
         {

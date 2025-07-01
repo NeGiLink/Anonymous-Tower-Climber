@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,24 +7,24 @@ namespace MyAssets
     {
 
         [SerializeField]
-        private SideMoveFoothold mFoothold;
+        private SideMoveFoothold        mFoothold;
 
-        private List<SideMoveFoothold> mFootholds = new List<SideMoveFoothold>();
-
-        [SerializeField]
-        private float mFootholdcolumnCount;
+        private List<SideMoveFoothold>  mFootholds = new List<SideMoveFoothold>();
 
         [SerializeField]
-        private float mFootholdcolumnInterval;
+        private float                   mFootholdcolumnCount;
 
         [SerializeField]
-        private float mFootholdStartPosition;
+        private float                   mFootholdcolumnInterval;
 
         [SerializeField]
-        private float mFootholdSpeed;
+        private float                   mFootholdStartPosition;
 
         [SerializeField]
-        private bool mFootholdDirection;
+        private float                   mFootholdSpeed;
+
+        [SerializeField]
+        private bool                    mFootholdDirection;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start()

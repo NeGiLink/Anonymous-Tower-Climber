@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace MyAssets
 {
+    // ゲームスコアを表示するUIクラス
     public class GameScoreView : MonoBehaviour
     {
         private Text mScoreText;

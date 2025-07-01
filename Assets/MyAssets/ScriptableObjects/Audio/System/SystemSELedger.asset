@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ec9842c38d46c4aa9086991da26e1f, type: 3}
+  m_Name: SystemSELedger
+  m_EditorClassIdentifier: 
+  mValues:
+  - {fileID: 8300000, guid: 7989e7c9da5c3ed4a959a22878e2f33c, type: 3}
+  - {fileID: 8300000, guid: 628a56d2c64fb534cb2d6f2a5007362b, type: 3}
+  - {fileID: 8300000, guid: d3c992fee6af87d4abcc54c3da73255c, type: 3}
+  - {fileID: 8300000, guid: 25da077bd1d9270459a72cc14ab3f58f, type: 3}

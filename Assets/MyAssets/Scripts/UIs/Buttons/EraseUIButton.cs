@@ -3,13 +3,14 @@ using UnityEngine.UI;
 
 namespace MyAssets
 {
+    // UIのボタンを押すと親オブジェクトを削除するクラス
     public class EraseUIButton : MonoBehaviour
     {
 
 
-        private Button mButton;
+        private Button                  mButton;
 
-        private GameActionSceneManager mGameActionSceneManager;
+        private GameActionSceneManager  mGameActionSceneManager;
 
         private void Awake()
         {

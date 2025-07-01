@@ -2,16 +2,20 @@ using UnityEngine;
 
 namespace MyAssets
 {
+    // 上方向に移動するイベントUIオブジェクト
     public class UpIside_UP_Direction : EventUIObject
     {
-        private RectTransform mRectTransform;
+        private RectTransform   mRectTransform;
 
-        private float mGoalYPosition = 0f;
+        private float           mGoalYPosition = 0f;
 
-        private Timer mMoveCoolTimer = new Timer();
-
-        private float mMoveSpeed = 100.0f;
-
+        private Timer           mMoveCoolTimer = new Timer();
+        [SerializeField]
+        private float           mMoveSpeed = 1.0f;
+        public void SetMoveSpeed(float speed)
+        {
+            mMoveSpeed = speed;
+        }
 
         private void Awake()
         {
@@ -42,7 +46,7 @@ namespace MyAssets
             if(mMoveCoolTimer.IsEnd())
             {
                 Vector2 anchoredPosition = mRectTransform.anchoredPosition;
-                anchoredPosition.y = Mathf.Lerp(anchoredPosition.y, mGoalYPosition, Time.unscaledDeltaTime);
+                anchoredPosition.y = Mathf.Lerp(anchoredPosition.y, mGoalYPosition, Time.unscaledDeltaTime * mMoveSpeed);
                 mRectTransform.anchoredPosition = anchoredPosition;
                 if (Mathf.Abs((int)anchoredPosition.y - (int)mGoalYPosition) < 0.01f)
                 {

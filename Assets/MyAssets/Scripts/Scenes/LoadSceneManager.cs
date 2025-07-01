@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace MyAssets
@@ -9,15 +8,16 @@ namespace MyAssets
         eTitle,
         eGame
     }
+    // SceneManager‚ðŠÇ—‚·‚éƒNƒ‰ƒX
     public static class LoadSceneManager
     {
 
-        private static int mCurrnetSceneIndex;
-        public static int CurrnetSceneIndex => mCurrnetSceneIndex;
+        private static int  mCurrnetSceneIndex;
+        public static int   CurrnetSceneIndex => mCurrnetSceneIndex;
 
-        private static int mPastSceneIndex;
+        private static int  mPastSceneIndex;
 
-        public static int PastSceneIndex => mPastSceneIndex;
+        public static int   PastSceneIndex => mPastSceneIndex;
         public static void LoadScene(int id)
         {
             mPastSceneIndex = SceneManager.GetActiveScene().buildIndex;

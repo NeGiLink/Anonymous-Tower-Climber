@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace MyAssets
 {
+    // プレイヤーのライフを表示するUIコンポーネント
     public class PlayerLifeView : MonoBehaviour
     {
         private Text mLifeText;

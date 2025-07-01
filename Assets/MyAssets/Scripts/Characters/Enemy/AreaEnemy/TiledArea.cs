@@ -2,13 +2,14 @@ using UnityEngine;
 
 namespace MyAssets
 {
+    //下方向から上方向に移動してくる敵のエリア部分の処理をするクラス
     public class TiledArea : MonoBehaviour
     {
-        private SpriteRenderer mSpriteRenderer;
-        public SpriteRenderer SpriteRenderer => mSpriteRenderer;
+        private SpriteRenderer  mSpriteRenderer;
+        public SpriteRenderer   SpriteRenderer => mSpriteRenderer;
 
         [SerializeField]
-        private float mSpeed;
+        private float           mSpeed;
 
         private void Awake()
         {
@@ -19,8 +20,7 @@ namespace MyAssets
             }
         }
 
-        // Update is called once per frame
-        void Update()
+        private　void Update()
         {
             float y = mSpriteRenderer.size.y;
             y += mSpeed * Time.deltaTime;

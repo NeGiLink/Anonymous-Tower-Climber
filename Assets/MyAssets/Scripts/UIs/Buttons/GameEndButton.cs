@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace MyAssets
 {
+    // ゲーム終了ボタンのクラス
     public class GameEndButton : MonoBehaviour
     {
 
@@ -23,6 +24,7 @@ namespace MyAssets
 
         private void Action()
         {
+            InputManager.Shutdown();
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else

@@ -4,11 +4,12 @@ using UnityEngine.UI;
 
 namespace MyAssets
 {
+    // プレイヤーのライフを表示するクラス
     public class PlayerLifeViewEvent : MonoBehaviour
     {
-        private Text mLifeText;
+        private Text        mLifeText;
 
-        private float mChangeLifeTime = 2.0f;
+        private float       mChangeLifeTime = 2.0f;
 
         public event Action OnLifeChange;
 
@@ -19,6 +20,8 @@ namespace MyAssets
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start()
         {
+            mLifeText.text = PlayerLifeManager.PastLife.ToString();
+            PlayerLifeManager.LifeUpdate();
             OnLifeChange += ViewTextUpdate;
         }
 
@@ -38,6 +41,10 @@ namespace MyAssets
 
         private void ViewTextUpdate()
         {
+            if(mLifeText.text != PlayerLifeManager.Life.ToString())
+            {
+                SystemSEManager.Instance.OnPlay((int)SystemSEManager.SEList_System.DecreaseLife);
+            }
             mLifeText.text = PlayerLifeManager.Life.ToString();
         }
     }

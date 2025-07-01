@@ -5,18 +5,13 @@ using UnityEngine.UI;
 
 namespace MyAssets
 {
+    // ダイアログボックスを管理するクラス
     [RequireComponent(typeof(ButtonController))]
     public class DialogBox : MonoBehaviour
     {
-        private Text mTitleText;
+        private Text            mTitleText;
 
-        private List<Button> mButtons = new List<Button>();
-
-        private ButtonImageList mButtonImageList;
-
-        private int mDisideIndex;
-
-        private int mPastDisideIndex;
+        private List<Button>    mButtons = new List<Button>();
 
         private GameActionSceneManager mGameActionSceneManager;
 
@@ -35,6 +30,16 @@ namespace MyAssets
             {
                 mGameActionSceneManager.GameEventing = true;
             }
+        }
+
+        private void Start()
+        {
+            GameResultManager.SetGameResult(GameResult.ePose);
+        }
+
+        private void OnDisable()
+        {
+            GameResultManager.SetGameResult(GameResult.eNone);
         }
     }
 }

@@ -1,20 +1,20 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace MyAssets
 {
+    // 敵キャラクターの移動を管理するクラス
     public class EnemyMovementer : DynamicGameObject
     {
         [SerializeField]
-        private bool            mIsCliffStop;
+        private bool                mIsCliffStop;
 
         [SerializeField]
-        private float           mMoveSpeed;
+        private float               mMoveSpeed;
 
         [SerializeField]
-        private float           mMoveDirection;
+        private float               mMoveDirection;
 
-        private Rigidbody2D     mRigidbody2D;
+        private Rigidbody2D         mRigidbody2D;
 
         private CapsuleCollider2D   mCapsuleCollider2D;
         private void Awake()
@@ -32,7 +32,7 @@ namespace MyAssets
         public override void Update()
         {
             base.Update();
-            if (IsOutViewport())
+            if (IsTopOutViewport()||IsBottomOutViewport())
             {
                 return;
             }

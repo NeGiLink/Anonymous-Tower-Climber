@@ -1,38 +1,38 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace MyAssets
 {
+    // プレイヤーの入力を管理するクラス
     [RequireComponent(typeof(PlayerMovementer))]
     public class PlayerInput : MonoBehaviour
     {
-        private CapsuleCollider2D mCapsuleCollider2D;
+        private CapsuleCollider2D   mCapsuleCollider2D;
 
 
         [SerializeField]
-        private Vector2 mMoveValue;
-        public Vector2  MoveValue => mMoveValue;
+        private Vector2             mMoveValue;
+        public Vector2              MoveValue => mMoveValue;
 
         [SerializeField]
-        private bool mJumpIdle;
+        private bool                mJumpIdle;
 
-        public bool JumpIdle => mJumpIdle;
-
-        [SerializeField]
-        private bool    mJump;
-        public bool     Jump => mJump;
+        public bool                 JumpIdle => mJumpIdle;
 
         [SerializeField]
-        private bool mIsGrounded;
-        public bool IsGrounded => mIsGrounded;
+        private bool                mJump;
+        public bool                 Jump => mJump;
 
         [SerializeField]
-        private bool mIsPastGrounded;
+        private bool                mIsGrounded;
+        public bool                 IsGrounded => mIsGrounded;
 
         [SerializeField]
-        private float mJumpValue;
+        private bool                mIsPastGrounded;
 
-        public float JumpValue => mJumpValue;
+        [SerializeField]
+        private float               mJumpValue;
+
+        public float                JumpValue => mJumpValue;
 
         private void Awake()
         {

@@ -2,27 +2,27 @@ using UnityEngine;
 
 namespace MyAssets
 {
+    // 足場が落ちるトラップのクラス
     public class FallFoothold : DynamicGameObject
     {
 
         [SerializeField]
-        private bool mIsFall;
+        private bool        mIsFall;
 
         private Rigidbody2D mRigidbody2D;
 
-        private BoxCollider2D mBoxCollider2D;
-        [SerializeField]
-        private float mFallGravityScale;
-        [SerializeField]
-        private float mRayLength;
 
         [SerializeField]
-        private float mRayPosX;
+        private float       mFallGravityScale;
+        [SerializeField]
+        private float       mRayLength;
+
+        [SerializeField]
+        private float       mRayPosX;
 
         private void Awake()
         {
             mRigidbody2D = GetComponentInChildren<Rigidbody2D>();
-            mBoxCollider2D = GetComponentInChildren<BoxCollider2D>();
         }
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         public override void Start()

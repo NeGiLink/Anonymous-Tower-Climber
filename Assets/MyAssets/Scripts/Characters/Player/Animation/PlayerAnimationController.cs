@@ -1,83 +1,102 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace MyAssets
 {
+    // プレイヤーキャラクターのアニメーションを制御するクラス
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(PlayerMovementer))]
     public class PlayerAnimationController : MonoBehaviour
     {
-        private PlayerInput         mPlayerInput;
+        private PlayerInput             mPlayerInput;
 
-        public PlayerInput PlayerInput => mPlayerInput;
+        public PlayerInput              PlayerInput => mPlayerInput;
 
-        private PlayerMovementer    mPlayerMovementer;
+        private PlayerMovementer        mPlayerMovementer;
 
-        public PlayerMovementer PlayerMovementer => mPlayerMovementer;
+        public PlayerMovementer         PlayerMovementer => mPlayerMovementer;
 
-        private Animator            mAnimator;
+        private Animator                mAnimator;
 
-        public Animator Animator => mAnimator;
+        public Animator                 Animator => mAnimator;
 
-        private string mMoveName = "Move";
-        public string MoveName => mMoveName;
+        private PlayerSEManager         mPlayerSEManager;
 
-        private string mJumpName = "Jump";
+        public PlayerSEManager          PlayerSEManager => mPlayerSEManager;
 
-        public string JumpName => mJumpName;
+        private string                  mMoveName = "Move";
+        public string                   MoveName => mMoveName;
 
-        private string mAttackName = "Attack";
+        private string                  mJumpName = "Jump";
 
-        public string AttackName => mAttackName;
+        public string                   JumpName => mJumpName;
+
+        private string                  mAttackName = "Attack";
+
+        public string                   AttackName => mAttackName;
 
         [SerializeField]
-        private AnimationStateType mInitState;
+        private AnimationStateType      mInitState;
         [SerializeField]
-        private AnimationStateType mCurrentState;
+        private AnimationStateType      mCurrentState;
 
-        public AnimationStateType CurrentState => mCurrentState;
+        public AnimationStateType       CurrentState => mCurrentState;
 
         public void SetCurrentState(AnimationStateType state)
         {
             mCurrentState = state;
         }
 
-        private IdleState mIdleState;
+        private IdleState               mIdleState;
 
-        private RunState mRunState;
+        private RunState                mRunState;
 
-        private JumpIdleState mJumpIdleState;
+        private JumpIdleState           mJumpIdleState;
 
-        private JumpState mJumpState;
+        private JumpState               mJumpState;
 
-        private AnimationState mAnimationState;
+        private DeathState              mDeathState;
 
-        private List<AnimationState> mAnimationStates = new List<AnimationState>();
+        private AnimationState          mAnimationState;
+
+        private List<AnimationState>    mAnimationStates = new List<AnimationState>();
 
         private void Awake()
         {
             mPlayerInput = GetComponent<PlayerInput>();
             mPlayerMovementer = GetComponent<PlayerMovementer>();
             mAnimator = GetComponent<Animator>();
+            mPlayerSEManager = GetComponent<PlayerSEManager>();
         }
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
         void Start()
         {
+            // Initialize individual states
             mIdleState = new IdleState();
             mRunState = new RunState();
             mJumpIdleState = new JumpIdleState();
             mJumpState = new JumpState();
-            mIdleState.SetUp(this);
-            mRunState.SetUp(this);
-            mJumpIdleState.SetUp(this);
-            mJumpState.SetUp(this);
+            mDeathState = new DeathState();
 
-            mAnimationStates.Add(mIdleState);
-            mAnimationStates.Add(mRunState);
-            mAnimationStates.Add(mJumpIdleState);
-            mAnimationStates.Add(mJumpState);
-            // 初期状態の設定
+            // Correctly initialize the array of AnimationState objects
+            AnimationState[] states = new AnimationState[]
+            {
+                mIdleState,
+                mRunState,
+                mJumpIdleState,
+                mJumpState,
+                mDeathState
+            };
+
+            for(int i = 0; i < states.Length; i++)
+            {
+                states[i].SetUp(this);
+            }
+
+            // Add states to the list
+            mAnimationStates.AddRange(states);
+
+            // Set the initial animation state
             TransAnimation(AnimationStateType.eIdle);
         }
 
@@ -100,7 +119,7 @@ namespace MyAssets
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             //向き反転
             Vector3 scale = transform.localScale;
@@ -126,16 +145,17 @@ namespace MyAssets
         eRun,
         eJumpIdle,
         eJump,
-        eAttack
+        eAttack,
+        eDeath
     }
 
-
+    // AnimationStateクラスは、プレイヤーのアニメーション状態を管理するための基底クラスです。
     public class AnimationState
     {
         protected PlayerAnimationController mAnimationController;
 
 
-        public void SetUp(PlayerAnimationController animationController)
+        public virtual void SetUp(PlayerAnimationController animationController)
         {
             mAnimationController = animationController;
         }
@@ -161,12 +181,24 @@ namespace MyAssets
         }
     }
 
-
+    // 各アニメーション状態を表すクラス
+    
     public class IdleState : AnimationState
     {
+        private PlayerDamageController mDamagerController;
+
+        public override void SetUp(PlayerAnimationController animationController)
+        {
+            base.SetUp(animationController);
+            mDamagerController = animationController.gameObject.GetComponent<PlayerDamageController>();
+        }
 
         public override AnimationStateType IsTransitioning()
         {
+            if(mDamagerController.Death)
+            {
+                return AnimationStateType.eDeath;
+            }
             if(mAnimationController.PlayerInput.MoveValue.x != 0)
             {
                 return AnimationStateType.eRun;
@@ -199,10 +231,21 @@ namespace MyAssets
 
     public class RunState : AnimationState
     {
+        private PlayerDamageController mDamagerController;
+
+        public override void SetUp(PlayerAnimationController animationController)
+        {
+            base.SetUp(animationController);
+            mDamagerController = animationController.gameObject.GetComponent<PlayerDamageController>();
+        }
 
         public override AnimationStateType IsTransitioning()
         {
-            if(mAnimationController.PlayerInput.MoveValue.x == 0)
+            if (mDamagerController.Death)
+            {
+                return AnimationStateType.eDeath;
+            }
+            if (mAnimationController.PlayerInput.MoveValue.x == 0)
             {
                 return AnimationStateType.eIdle;
             }
@@ -221,21 +264,24 @@ namespace MyAssets
         {
             mAnimationController.Animator.SetInteger(mAnimationController.MoveName, 1);
         }
-        public override void Update()
-        {
-        }
-
-        public override void Exit()
-        {
-            
-        }
     }
 
     public class JumpIdleState : AnimationState
     {
+        private PlayerDamageController mDamagerController;
+
+        public override void SetUp(PlayerAnimationController animationController)
+        {
+            base.SetUp(animationController);
+            mDamagerController = animationController.gameObject.GetComponent<PlayerDamageController>();
+        }
 
         public override AnimationStateType IsTransitioning()
         {
+            if (mDamagerController.Death)
+            {
+                return AnimationStateType.eDeath;
+            }
             if (mAnimationController.PlayerInput.Jump)
             {
                 return AnimationStateType.eJump;
@@ -249,21 +295,30 @@ namespace MyAssets
             mAnimationController.Animator.SetInteger(mAnimationController.JumpName, 0);
             mAnimationController.PlayerMovementer.SetMoveStoping(true);
         }
-        public override void Update()
-        {
-        }
 
         public override void Exit()
         {
             mAnimationController.PlayerMovementer.SetMoveStoping(false);
+            mAnimationController.PlayerSEManager.OnPlay((int)PlayerSEManager.SEList_Player.eJump);
         }
     }
 
     public class JumpState : AnimationState
     {
+        private PlayerDamageController mDamagerController;
+
+        public override void SetUp(PlayerAnimationController animationController)
+        {
+            base.SetUp(animationController);
+            mDamagerController = animationController.gameObject.GetComponent<PlayerDamageController>();
+        }
 
         public override AnimationStateType IsTransitioning()
         {
+            if (mDamagerController.Death)
+            {
+                return AnimationStateType.eDeath;
+            }
             if (mAnimationController.PlayerInput.IsGrounded)
             {
                 return AnimationStateType.eIdle;
@@ -276,13 +331,25 @@ namespace MyAssets
             mAnimationController.Animator.SetInteger(mAnimationController.MoveName, -1);
             mAnimationController.Animator.SetInteger(mAnimationController.JumpName, 1);
         }
-        public override void Update()
+    }
+
+    public class DeathState : AnimationState
+    {
+        private PlayerDamageController mDamagerController;
+
+        public override void SetUp(PlayerAnimationController animationController)
         {
+            base.SetUp(animationController);
+            mDamagerController = animationController.gameObject.GetComponent<PlayerDamageController>();
+        }
+        public override AnimationStateType IsTransitioning()
+        {
+            return AnimationStateType.eNone;
         }
 
-        public override void Exit()
+        public override void Start()
         {
-            
+            mAnimationController.PlayerSEManager.OnPlay((int)PlayerSEManager.SEList_Player.eDamage);
         }
     }
 }
